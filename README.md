@@ -17,7 +17,29 @@ To run `rocket-cores`, just type:
 poetry run rocket-cores
 ```
 Command will fetch the api asynchronously for 5 most reused cores.
+You can change number of cores via `--cores` flag:
+``` console
+poetry run rocket-cores --cores 10
+```
+Will produce:
+``` console
+The most reused rocket cores:
 
+_____________________________________
+|core id|reuse count|mass total [kg]|
+|-------+-----------+---------------|
+| B1049 |     6     |     91880     |
+| B1051 |     5     |     75274     |
+| B1048 |     4     |     49245     |
+| B1046 |     3     |     13550     |
+| B1059 |     3     |     23977     |
+| B1056 |     3     |     26910     |
+| B1047 |     2     |     16576     |
+| B1060 |     2     |     34680     |
+| B1058 |     2     |     24925     |
+| B1032 |     1     |     4230      |
+=====================================
+```
 For further guidance, type:
 ``` console
 poetry run rocket-cores --help

@@ -10,7 +10,7 @@ from .payload import calculate_payload_for_cores, format_payload_query, get_payl
 
 async def fetch_core_info(
     only_successful, future_launches, limit
-) -> List[Tuple[str, int, float]]:
+) -> List[Tuple[str, int, int]]:
     async with aiohttp.ClientSession() as session:
         response_cores = await get_cores(session, limit)
         core_ids = get_cores_ids(response_cores)
@@ -28,6 +28,16 @@ async def fetch_core_info(
         )
 
         return list(zip(core_ids, core_reuse_count, total_masses_for_each_core))
+
+
+def present_data(data: List[Tuple[str, int, int]]) -> None:
+    print("\nThe most reused rocket cores:\n")
+    print("_" * 37)
+    print("|core id|reuse count|mass total [kg]|")
+    print("|" + "-" * 7 + "+" + "-" * 11 + "+" + "-" * 15 + "|")
+    for id_, r_count, mass in data:
+        print(f"|{id_:^7}|{r_count:^11}|{mass:^15}|")
+    print("=" * 37)
 
 
 def main():
@@ -57,5 +67,4 @@ def main():
     result = loop.run_until_complete(
         fetch_core_info(args.only_successful, args.no_future_launches, args.cores)
     )
-
-    print("The most reused rocket cores: ", result)
+    present_data(result)

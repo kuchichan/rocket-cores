@@ -17,11 +17,13 @@ def calculate_payload_for_cores(
 ) -> List[int]:
     launch_key = "launches" if future_launches else "launchesPast"
     return [
-        sum(
-            payload["payload_mass_kg"]
-            for el in response["data"][launch_key]
-            for payload in el["rocket"]["second_stage"]["payloads"]
-            if payload["payload_mass_kg"] is not None
+        round(
+            sum(
+                payload["payload_mass_kg"]
+                for el in response["data"][launch_key]
+                for payload in el["rocket"]["second_stage"]["payloads"]
+                if payload["payload_mass_kg"] is not None
+            )
         )
         for response in responses
     ]
