@@ -16,9 +16,9 @@ To run `rocket-cores`, just type:
 ``` console
 poetry run rocket-cores
 ```
-Command will fetch the api asynchronously, for 5 most reused cores.
+Command will fetch the api asynchronously for 5 most reused cores.
 
 For further guidance, type:
 ``` console
-rocket-cores --help
+poetry run rocket-cores --help
 ```
