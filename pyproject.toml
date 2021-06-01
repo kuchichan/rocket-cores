@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "rocket-cores"
+version = "0.1.0"
+description = ""
+authors = ["kuchichan <pawel.kucharski@hotmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = "^3.7.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^21.5b2"
+pytest-mock = "^3.6.1"
+pytest-asyncio = "^0.15.1"
+pytest-cov = "^2.12.0"
+pylint = "^2.8.3"
+isort = "^5.8.0"
+mypy = "^0.812"
+
+[tool.poetry.scripts]
+rocket-cores = "rocket_cores.main:main"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
