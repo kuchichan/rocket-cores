@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 
-from rocket_cores.constants import CORE_QUERY, GRAPHQL_API_URL
+from rocket_cores.constants import CORE_QUERY_LIMIT, GRAPHQL_API_URL
 from rocket_cores.core import get_cores, get_cores_ids, get_reuse_count
 from rocket_cores.payload import (
     calculate_payload_for_cores,
@@ -86,12 +86,12 @@ async def test_fake_session_cores(fake_session_cores):
     fake_session = fake_session_cores(fake_core_data)
 
     async with fake_session.post(
-        url="URL", json={"query": CORE_QUERY, "variables": 10}
+        url="URL", json={"query": CORE_QUERY_LIMIT, "variables": 10}
     ) as s:
         result = s
         assert await result.json() == fake_core_data
         fake_session.post.assert_called_with(
-            url="URL", json={"query": CORE_QUERY, "variables": 10}
+            url="URL", json={"query": CORE_QUERY_LIMIT, "variables": 10}
         )
 
 
@@ -103,7 +103,8 @@ async def test_get_cores_calls_post_with_given_limit_and_url(fake_session_cores)
 
     assert result == fake_core_data
     fake_session.post.assert_called_with(
-        url=GRAPHQL_API_URL, json={"query": CORE_QUERY, "variables": {"lim": limit}}
+        url=GRAPHQL_API_URL,
+        json={"query": CORE_QUERY_LIMIT, "variables": {"lim": limit}},
     )
 
 

@@ -11,13 +11,13 @@ Installation via pip:
 poetry install
 poetry build
 ```
-
 To run `rocket-cores`, just type:
 ``` console
-poetry run rocket-cores
+poetry run rocket-cores --cores 5
 ```
 Command will fetch the api asynchronously for 5 most reused cores.
-You can change number of cores via `--cores` flag:
+If you call `rocket-cores` without "--cores" it will fetch all cores data by 10 cores (pagination is used - additionally you need to wait 10 sec for next page, because of the API limits)
+
 ``` console
 poetry run rocket-cores --cores 10
 ```

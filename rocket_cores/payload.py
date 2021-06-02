@@ -76,3 +76,20 @@ async def get_payloads(
     ]
     results = await asyncio.gather(*tasks)
     return list(results)
+
+
+async def fetch_launches_data(
+    session, core_ids, only_successful, future_launches
+) -> List[int]:
+    query = format_payload_query(future_launches=future_launches)
+    response_launches = await get_payloads(
+        session,
+        core_ids,
+        query,
+        only_successful=only_successful,
+        future_launches=future_launches,
+    )
+    total_masses_for_each_core = calculate_payload_for_cores(
+        response_launches, future_launches=future_launches
+    )
+    return total_masses_for_each_core
