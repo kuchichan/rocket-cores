@@ -15,6 +15,13 @@ def main():
         help="Number of most reused cores fetched from api",
     )
     parser.add_argument(
+        "--offset",
+        type=int,
+        default=0,
+        help="Offset from first element in cores",
+    )
+
+    parser.add_argument(
         "--only-successful",
         action="store_true",
         help="Only successful launches counts.",
@@ -30,6 +37,6 @@ def main():
     loop = asyncio.get_event_loop()
     loop.run_until_complete(
         fetch_data_interactive(
-            args.only_successful, args.no_future_launches, args.cores
+            args.only_successful, args.no_future_launches, args.cores, args.offset
         )
     )

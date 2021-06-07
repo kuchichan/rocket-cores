@@ -13,11 +13,13 @@ def get_reuse_count(response: Dict[str, Any]) -> List[int]:
     return [el["reuse_count"] for el in response["data"]["cores"]]
 
 
-async def get_cores(session: ClientSession, limit: int) -> Dict[str, Any]:
+async def get_cores(
+    session: ClientSession, limit: int, offset: int = 0
+) -> Dict[str, Any]:
     json: Dict[str, Any] = (
         {"query": CORE_QUERY}
         if not limit
-        else {"query": CORE_QUERY_LIMIT, "variables": {"lim": limit}}
+        else {"query": CORE_QUERY_LIMIT, "variables": {"lim": limit, "offset": offset}}
     )
     async with session.post(
         url=GRAPHQL_API_URL,
@@ -30,8 +32,8 @@ async def get_cores(session: ClientSession, limit: int) -> Dict[str, Any]:
         return result
 
 
-async def fetch_core_info(session, limit) -> Tuple[List[str], List[int]]:
-    response_cores = await get_cores(session, limit)
+async def fetch_core_info(session, limit, offset) -> Tuple[List[str], List[int]]:
+    response_cores = await get_cores(session, limit, offset)
     core_ids = get_cores_ids(response_cores)
     core_reuse_count = get_reuse_count(response_cores)
 

@@ -26,10 +26,10 @@ def get_input():
 
 
 async def fetch_data_interactive(
-    only_successful: bool, future_launches: bool, limit: int
+    only_successful: bool, future_launches: bool, limit: int, offset: int = 0
 ) -> None:
     async with aiohttp.ClientSession() as session:
-        core_ids, reuse_count = await fetch_core_info(session, limit)
+        core_ids, reuse_count = await fetch_core_info(session, limit, offset)
         core_list_length = len(core_ids)
 
         if core_list_length > MAX_CORE_LIMIT:
@@ -71,10 +71,10 @@ async def fetch_data_interactive(
 
 
 async def fetch_data_automatically(
-    only_successful: bool, future_launches: bool, limit: int
+    only_successful: bool, future_launches: bool, limit: int, offset: int = 0
 ) -> List[Tuple[str, int, int]]:
     async with aiohttp.ClientSession() as session:
-        core_ids, reuse_count = await fetch_core_info(session, limit)
+        core_ids, reuse_count = await fetch_core_info(session, limit, offset)
         core_list_length = len(core_ids)
 
         if core_list_length < MAX_CORE_LIMIT:

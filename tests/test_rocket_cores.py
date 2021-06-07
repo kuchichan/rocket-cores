@@ -104,7 +104,7 @@ async def test_get_cores_calls_post_with_given_limit_and_url(fake_session_cores)
     assert result == fake_core_data
     fake_session.post.assert_called_with(
         url=GRAPHQL_API_URL,
-        json={"query": CORE_QUERY_LIMIT, "variables": {"lim": limit}},
+        json={"query": CORE_QUERY_LIMIT, "variables": {"lim": limit, "offset": 0}},
     )
 
 

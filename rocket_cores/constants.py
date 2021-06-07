@@ -6,8 +6,8 @@ GRAPHQL_API_URL: Final[str] = "https://api.spacex.land/graphql/"
 
 CORE_QUERY_LIMIT: Final[
     str
-] = """query($lim: Int) {
-  cores(sort: "reuse_count", order: "desc", limit: $lim) { 
+] = """query($lim: Int, $offset: Int) {
+  cores(sort: "reuse_count", order: "desc", limit: $lim, offset: $offset) { 
     id
     reuse_count
   }
